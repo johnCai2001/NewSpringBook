@@ -1,16 +1,23 @@
-<!doctype html>
-<html lang="zh-Hant-TW">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>基本頁面</title>
-</head>
-
 <body>
 
-  <main>
-    <h1>${books}</h1>
-  </main>
+<table border="1">
+
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>書名</th>
+            <th>作者</th>
+        </tr>
+    </thead>
+
+	<tbody>
+	    <tr th:each="book : ${books}">
+	        <td th:text="${book.ID}"></td>
+	        <td th:text="${book.Name}"></td>
+	        <td th:text="${book.Author}"></td>
+	    </tr>
+	</tbody>
+</table>
 
 </body>
 </html>
