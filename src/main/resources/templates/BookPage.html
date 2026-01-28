@@ -11,6 +11,8 @@
     </thead>
 
 	<tbody>
+		<!--model.addAttribute("books",Allbooks);-->
+		<!--  <tr th:each="幫迴圈取的變數 : ${Controller中準備好要傳過來的資料(Allbooks)}"> -->
 	    <tr th:each="book : ${books}">
 	        <td th:text="${book.ID}"></td>
 	        <td th:text="${book.Name}"></td>

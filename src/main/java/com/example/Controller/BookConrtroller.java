@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.model.BookVo;
 import com.example.service.BookService;
@@ -26,10 +27,27 @@ public class BookConrtroller {
 	//呼叫 service 拿資料findAll()，放進 model並把要傳入的資料取名叫books，回傳要顯示的頁面名稱（View）
 	@GetMapping("/books")
 	public String GetAllbooks(Model model) {
-		//BookVo沒辦法直接用BookEntity，所以要在Service用迴圈去轉換
+		//BookVo沒辦法直接用BookEntity，所以要在Service用迴圈去轉換(getAllBook方法)
 		List<BookVo> Allbooks=bookservice.getAllBook();
 		System.out.println("ListBook Sucess");
+		//把後端準備好的資料 (Allbooks)，丟到前端並取名叫 "books"。
 		model.addAttribute("books",Allbooks);
 		return "BookPage";
 	}
+	
+	@GetMapping("/AddBooks")
+	public String AddBook() {
+		System.out.println("AddBook Success");
+		return "AddBook";
+	}
+	
+	
+	@PostMapping("/insertBooks")
+	public List<BookVo> InsertBooks(Model model) {		
+    List<BookVo> insertbooks=bookservice.InserBooks();
+		model.addAttribute("Insertbooks",insertbooks);
+		System.out.println("InsertBooks Sucess");
+		
+	return "redirect:/books";
+   }
 }

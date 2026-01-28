@@ -8,17 +8,12 @@
 
 <body>
 
-  <main>
-    <h1>Hello</h1>
-  </main>
+	<form th:action="@{/insertBooks}" method="post">
+	    
+	    <input type="書名" name="Name">
+	    <input type="作者" name="Author">
+	    ...
+	</form>
 
-  <a th:href="@{/books}">
-      <button>前往書籍列表</button>
-  </a>
-
-  <a th:href="@{/insertBooks}">
-        <button>新增書籍</button>
-  </a>
-  
 </body>
 </html>
