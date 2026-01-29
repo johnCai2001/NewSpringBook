@@ -1,19 +1,35 @@
-<!doctype html>
-<html lang="zh-Hant-TW">
+<!DOCTYPE html>
+<html lang="zh-TW" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>基本頁面</title>
+    <meta charset="UTF-8">
+    <title>新增書籍</title>
 </head>
-
 <body>
 
-	<form th:action="@{/insertBooks}" method="post">
-	    
-	    <input type="書名" name="Name">
-	    <input type="作者" name="Author">
-	    ...
-	</form>
+<h2>新增書籍</h2>
+
+
+<form th:action="@{/insertBooks}" th:object="${book}" method="post" enctype="multipart/form-data">
+
+
+    <!-- 書名 -->
+    <label>書名：</label>
+    <input type="text" th:field="*{Name}" placeholder="請輸入書名">
+    <br><br>
+
+    <!-- 作者 -->
+    <label>作者：</label>
+    <input type="text" th:field="*{Author}" placeholder="請輸入作者">
+    <br><br>
+
+    <!-- 購買日期 -->
+    <label>購買日期：</label>
+    <input type="date" th:field="*{Buydate}">
+    <br><br>
+
+                 <button type="submit">新增書籍</button>
+				 <a th:href="@{/books}">取消</a>
+</form>
 
 </body>
 </html>

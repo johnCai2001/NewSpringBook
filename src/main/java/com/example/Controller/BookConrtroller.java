@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.model.BookVo;
@@ -36,18 +37,17 @@ public class BookConrtroller {
 	}
 	
 	@GetMapping("/AddBooks")
-	public String AddBook() {
+	public String AddBook(Model model) {
+		model.addAttribute("book", new BookVo());
 		System.out.println("AddBook Success");
 		return "AddBook";
 	}
 	
 	
 	@PostMapping("/insertBooks")
-	public List<BookVo> InsertBooks(Model model) {		
-    List<BookVo> insertbooks=bookservice.InserBooks();
-		model.addAttribute("Insertbooks",insertbooks);
-		System.out.println("InsertBooks Sucess");
-		
+	public String  AddBooks(@ModelAttribute("book")  BookVo vo) {		
+          bookservice.InserBooks(vo);
 	return "redirect:/books";
    }
+
 }
