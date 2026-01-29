@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.model.BookVo;
@@ -36,6 +37,7 @@ public class BookConrtroller {
 		return "BookPage";
 	}
 	
+	//跳轉到AddBooks的頁面AddBooks.html
 	@GetMapping("/AddBooks")
 	public String AddBook(Model model) {
 		model.addAttribute("book", new BookVo());
@@ -43,11 +45,18 @@ public class BookConrtroller {
 		return "AddBook";
 	}
 	
-	
+	//把Service的資料印到前端畫面，並跳回新增畫面
 	@PostMapping("/insertBooks")
 	public String  AddBooks(@ModelAttribute("book")  BookVo vo) {		
           bookservice.InserBooks(vo);
 	return "redirect:/books";
    }
+	
+	@PostMapping("/DeleteBooks/{ID}")
+	public String DeleteBooks(@PathVariable("ID") Long ID,Model model ) {
+		 bookservice.DeleteBooksById(ID);
+		 System.out.println("Delete Sucess");
+		 return "redirect:/books"; 
+	}
 
 }

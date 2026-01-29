@@ -53,6 +53,10 @@ public class BookService {
 	        }
 	        return null;
 		}
+	   //刪除資料
+	   public void DeleteBooksById(Long ID) {
+		   Bookrepo.deleteById(ID);
+	   }
 	
 }	
 
