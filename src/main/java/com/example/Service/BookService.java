@@ -72,11 +72,7 @@ public class BookService {
 		if (!vo.getAuthor().isBlank()) {
 			entity.setAuthor(vo.getAuthor());
 		}
-		
-		if (!vo.getBuydate().isBlank()) {
-			entity.setBuydate(parseDate(vo.getBuydate()));
-		}
-		
+		Bookrepo.save(entity);
 	      }
        }
 
