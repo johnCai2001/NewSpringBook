@@ -3,6 +3,7 @@ package com.example.service;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,12 @@ public class BookService {
 
 	@Autowired
 	private  BookRepository Bookrepo;
-
+	
+	//要編輯某一本書 → 你一定要知道「是哪一本」。而「哪一本」的唯一識別就是 ID。
+	public BookVo getBookById(Long id) {
+	 BookEntity Entity = Bookrepo.findById(id).orElse(null);
+	 return ConverToVo(Entity);
+	}
 	    //Entity轉換成BookVo的方法
 	    public BookVo ConverToVo(BookEntity e) {
 	        BookVo vo = new BookVo();
@@ -57,6 +63,21 @@ public class BookService {
 	   public void DeleteBooksById(Long ID) {
 		   Bookrepo.deleteById(ID);
 	   }
-	
-}	
+	   
+	public void  updateBooks(BookVo vo) {
+		BookEntity entity = Bookrepo.findById(vo.getID()).orElse(null);
+		if (!vo.getName().isBlank()) {
+			entity.setName(vo.getName());
+		}
+		if (!vo.getAuthor().isBlank()) {
+			entity.setAuthor(vo.getAuthor());
+		}
+		
+		if (!vo.getBuydate().isBlank()) {
+			entity.setBuydate(parseDate(vo.getBuydate()));
+		}
+		
+	      }
+       }
+
 

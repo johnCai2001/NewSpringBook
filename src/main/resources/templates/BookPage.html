@@ -18,7 +18,7 @@
 	        <td th:text="${book.ID}"></td>
 	        <td th:text="${book.Name}"></td>
 	        <td th:text="${book.Author}"></td>
-			<td><a href="${}">編輯</a></td>
+			<td><a th:href="@{/ToUpdatePage/{id}(id=${book.ID})}">編輯</a></td>
 			<td><form th:action="@{/DeleteBooks/{id}(id=${book.ID})}" method="post">
 			  <button type="submit">刪除</button>
 			</form></td>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-TW" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>編輯</title>
+</head>
+<body>
+
+<h2>編輯書籍</h2>
+
+<input type="hidden" th:field="*{ID}">
+
+
+<form th:action="@{/UpdateBook}" th:object="${book}" method="post">
+
+	
+    <!-- 書名 -->
+    <label>書名：</label>
+    <input type="text" th:field="*{Name}" placeholder="請輸入書名">
+    <br><br>
+
+    <!-- 作者 -->
+    <label>作者：</label>
+    <input type="text" th:field="*{Author}" placeholder="請輸入作者">
+    <br><br>
+
+                 <button type="submit">編輯</button>
+				 <a th:href="@{/books}">取消</a>
+</form>
+
+</body>
+</html>

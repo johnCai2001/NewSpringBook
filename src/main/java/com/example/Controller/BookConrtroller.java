@@ -37,6 +37,7 @@ public class BookConrtroller {
 		return "BookPage";
 	}
 	
+	
 	//跳轉到AddBooks的頁面AddBooks.html
 	@GetMapping("/AddBooks")
 	public String AddBook(Model model) {
@@ -45,6 +46,7 @@ public class BookConrtroller {
 		return "AddBook";
 	}
 	
+	
 	//把Service的資料印到前端畫面，並跳回新增畫面
 	@PostMapping("/insertBooks")
 	public String  AddBooks(@ModelAttribute("book")  BookVo vo) {		
@@ -52,11 +54,33 @@ public class BookConrtroller {
 	return "redirect:/books";
    }
 	
+	
+	//刪除書本
 	@PostMapping("/DeleteBooks/{ID}")
 	public String DeleteBooks(@PathVariable("ID") Long ID,Model model ) {
 		 bookservice.DeleteBooksById(ID);
 		 System.out.println("Delete Sucess");
 		 return "redirect:/books"; 
 	}
-
+	
+	
+	//跳轉到編輯頁UpdateBooks的頁面UpdateBookPage.html
+	//Mapping中的{ID}要與@Pathvarible("ID")要一樣
+	//model.addAttribute("book", vo)的book物件要與前端 th:object="${book}對上
+	@GetMapping("/ToUpdatePage/{ID}")
+	public String UpdatePage(@PathVariable("ID") Long ID, Model model) {
+		BookVo vo =bookservice.getBookById(ID);
+		 model.addAttribute("book", vo);
+		return "UpdateBookPage";
 }
+	
+	
+	//編輯書本
+	//@PostMapping("/UpdateBook")對上th:action="@{/UpdateBook}
+	@PostMapping("/UpdateBook")
+	public String UpdateBook(@ModelAttribute("Update") BookVo vo){ 
+		 bookservice.updateBooks(vo);
+		return "redirect:/books";	
+	}
+
+	}
